@@ -1,3 +1,4 @@
+
 import { useSelector } from "react-redux";
 import { mailAction } from "./MailSlice";
 export const addMail=(mail)=>{
@@ -9,7 +10,7 @@ export const addMail=(mail)=>{
         try{
         const response = await fetch(`https://mail-box-42f0f-default-rtdb.firebaseio.com/${senderEmail}.json`,{
             method : "POST",
-            body : JSON.stringify({...mail }),
+            body : JSON.stringify({...mail ,read:true}),
             headers : {
                 'Content-Type':'application/json'
             }
@@ -18,7 +19,7 @@ export const addMail=(mail)=>{
         if(senderEmail != receiverEmail){
             await fetch(`https://mail-box-42f0f-default-rtdb.firebaseio.com/${receiverEmail}.json`,{
                 method : "POST",
-                body : JSON.stringify({...mail }),
+                body : JSON.stringify({...mail ,read:false}),
                 headers : {
                     'Content-Type':'application/json'
                 }
@@ -48,7 +49,7 @@ export const addMail=(mail)=>{
     }
 }
 
-export const replacemail=(emailUrl , loggedInEmail)=>{
+export const replacemail=(emailUrl , loggedUserEmail)=>{
     return async(dispatch)=>{
         try{
 
@@ -58,16 +59,20 @@ export const replacemail=(emailUrl , loggedInEmail)=>{
 
             if(res.ok){
                 let mailData =[]
-
+                let unReadMessage =0
                 for(let key in data){
                     mailData =[{id:key , ...data[key]} , ...mailData]
+                    if(data[key].to === loggedUserEmail && data[key].read === false){
+                        unReadMessage ++
+                    }
                 }
 
                 console.log("first time" , mailData)
 
                 dispatch(
                     mailAction.replace({
-                        mailData :mailData 
+                        mailData :mailData,
+                        unReadMessage : unReadMessage
                        })
                 )
             }else{

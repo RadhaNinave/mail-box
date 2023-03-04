@@ -19,7 +19,7 @@ const  Navigation = () =>{
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="me-auto">
           {show && <NavLink style={{fontWeight : "bold" , padding:5+"px"}} to='/compose'>Compose Email</NavLink>}
-          {show && <NavLink style={{fontWeight : "bold" , padding:5+"px"}} to='/inbox' >Inbox Email  </NavLink>}
+          {show && <NavLink style={{fontWeight : "bold" , padding:5+"px"}} to='/inbox' >Inbox Email {unReadMessage} </NavLink>}
           {show && <NavLink style={{fontWeight : "bold" , padding:5+"px"}} to='/sent' >Sent Email</NavLink>}
 
 
