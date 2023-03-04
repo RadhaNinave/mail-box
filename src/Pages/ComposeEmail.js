@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import { addMail } from "../Components/store/MailAction";
+import { mailAction } from "../Components/store/MailSlice";
 import  './Compose.css';
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 const ComposeMail = () =>{
@@ -19,14 +20,18 @@ const ComposeMail = () =>{
      const composeMailHandler=(event)=>{
         event.preventDefault();
        console.log("compose button clicked")
-       const mailData = {
-         from : localStorage.getItem('email'),
-         to : inputMailRef.current.value,
-         title : inputSubjectRef.current.value,
-         message : editorState.getCurrentContent().getPlainText()
-       }
+      
+        const mailData = {
+        
+            from : localStorage.getItem('email'),
+            to : inputMailRef.current.value,
+            title : inputSubjectRef.current.value,
+            message : editorState.getCurrentContent().getPlainText()
+          }
+          
        console.log(mailData)
        dispatch(addMail(mailData))
+       dispatch(mailAction.add(mailData))
        inputMailRef.current.value=""
         inputSubjectRef.current.value=""
         setEditorState(null)
@@ -35,7 +40,8 @@ const ComposeMail = () =>{
         <div>
             <div style={{width:60+"%" , justifyContent:"center" , margin:"auto"} }>
       <Form   onSubmit={composeMailHandler} className="text-center mt-2 mr-3">
-     
+      <Button variant="secondary" type="submit" className="mt-2">Send</Button> 
+
         <Row >
           <Col xs={1}>
             <Form.Label>To</Form.Label>
@@ -57,8 +63,6 @@ const ComposeMail = () =>{
             onEditorStateChange={editorHandler}
             />
         </Row>
-        <Button variant="secondary" type="submit" className="mt-2">Send</Button> 
-
       </Form>
     </div>
         </div>

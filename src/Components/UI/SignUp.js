@@ -31,7 +31,7 @@ const SignUp = () =>{
                 return
             }
         }
-    
+        
         try{
             const res = await fetch(url ,{
                 method : "POST",
@@ -53,14 +53,8 @@ const SignUp = () =>{
                 localStorage.setItem('email',data.email)
                 inputEmailRef.current.value=""
                 inputPasswordRef.current.value=""
-                if(!login){
-                    inputConfirmPasswordRef.current.value=""
-                    alert("sign up successfully")
-                }else{
-                    alert("Login SuccessFully")
-                    navigate("/home")
-                    
-                }
+                navigate('/compose');
+               
             }else{
               const data = await res.json;
               throw data.error
@@ -118,3 +112,4 @@ const SignUp = () =>{
     export default SignUp;
     
   
+

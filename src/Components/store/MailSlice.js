@@ -9,6 +9,11 @@ const mailSlice= createSlice({
         {
             state.firstTime=action.payload
         },
+        replace(state , action){
+            state.mailData = action.payload.mailData
+            state.firstTime = false
+            state.unReadMessage = action.payload.unReadMessage
+        },
         add(state,action)
         {
             state.mailData=[action.payload,...state.mailData]
