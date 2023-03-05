@@ -106,3 +106,37 @@ export const deleteMail=(mail)=>{
          }
     }
 }
+export const updateMail=(emailUrl , loggedUserEmail , currentMail)=>{
+    return async(dispatch)=>{
+        try{
+            const res = await fetch(`https://mail-box-42f0f-default-rtdb.firebaseio.com/${emailUrl}.json`)
+
+            const data = await res.json();
+
+            if(res.ok){
+                if(data.length>currentMail.length){
+
+                    let mailData =[]
+                    let unReadMessage =0
+
+                    for(let key in data){
+                        mailData =[{id:key , ...data[key]} , ...mailData]
+                        if(data[key].to === loggedUserEmail && data[key].read === false){
+                            unReadMessage ++
+                        }
+                    }
+                    dispatch(
+                        mailAction.replace({
+                            mailData :mailData ,
+                            unReadMessage : unReadMessage
+                           })
+                    )
+                }
+            }else{
+                throw data.error
+            }
+        }catch(error){
+            console.log(error.message)
+        }
+    }
+}
