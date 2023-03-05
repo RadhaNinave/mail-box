@@ -20,7 +20,7 @@ const  Navigation = () =>{
         <Nav className="me-auto">
           {show && <NavLink style={{fontWeight : "bold" , padding:5+"px"}} to='/compose'>Compose Email</NavLink>}
           {show && <NavLink style={{fontWeight : "bold" , padding:5+"px"}} to='/inbox' >Inbox Email {unReadMessage} </NavLink>}
-          {show && <NavLink style={{fontWeight : "bold" , padding:5+"px"}} to='/sent' >Sent Email</NavLink>}
+          {show && <NavLink style={{fontWeight : "bold" , padding:5+"px"}} to='/inbox' >Sent Email</NavLink>}
 
 
         </Nav>

@@ -3,7 +3,7 @@ import { authAction } from "../store/Auth";
 import Auth from "../store/Auth";
 import { replacemail } from "../store/MailAction";
 const Home =() =>{
-    const dispatch = useDispatch()
+  /*  const dispatch = useDispatch()
 
     const isLoggedIn =useSelector(state=>state.auth.isLoggedIn)
     const firstTime = useSelector(state=>state.mail.firstTime)
@@ -14,7 +14,7 @@ const Home =() =>{
       const loggedEmail = localStorage.getItem('email');
       const emailUrl = loggedEmail.replace("@","").replace(".","")
      dispatch(replacemail(emailUrl , loggedEmail))
-    }
+    }*/
     return(
    
         <div>Welcome to Mail box</div>

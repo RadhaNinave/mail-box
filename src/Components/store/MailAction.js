@@ -1,4 +1,4 @@
-
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { mailAction } from "./MailSlice";
 export const addMail=(mail)=>{
@@ -63,7 +63,7 @@ export const replacemail=(emailUrl , loggedUserEmail)=>{
                 for(let key in data){
                     mailData =[{id:key , ...data[key]} , ...mailData]
                     if(data[key].to === loggedUserEmail && data[key].read === false){
-                        unReadMessage ++
+                        unReadMessage++;
                     }
                 }
 
@@ -83,7 +83,9 @@ export const replacemail=(emailUrl , loggedUserEmail)=>{
             console.log(error.message)
         }
     }
+    
 }
+
 export const deleteMail=(mail)=>{
     const userEmail = localStorage.getItem('email')
     const emailUrl = userEmail.replace("@","").replace(".","")

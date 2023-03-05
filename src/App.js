@@ -8,6 +8,7 @@ import SignUp from './Components/UI/SignUp';
 import ComposeMail from './Pages/ComposeEmail';
 import InboxEmail from './Pages/Inbox';
 import MailPage from './Components/UI/MailPage';
+import SentEmail from './Pages/Sent';
 
 function App() {
 
@@ -18,10 +19,13 @@ function App() {
         <Route path="/" exact element={<SignUp/>}></Route>
         <Route path="/home" element={<Home/>}></Route>
         <Route path='/compose' element={<ComposeMail/>}></Route>
-        <Route path='/inbox' element={<InboxEmail/>}></Route>
+        <Route path="/inbox/*" element={<InboxEmail/>} />
         
-        <Route path="/inbox/:id" element={<MailPage />} />
+        <Route path="/:id" element={<MailPage />} />
+        
 
+        <Route path='/inbox/*' element={<SentEmail/>}/>
+        
       </Routes>
     </div>
   );

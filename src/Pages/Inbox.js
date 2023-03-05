@@ -15,11 +15,10 @@ import { deleteMail } from '../Components/store/MailAction';
     const mails = useSelector((state)=>state.mail.mailData)
     const email = localStorage.getItem("email")
     const inboxMail = mails.filter(mail=>mail.to === email )
-
     const mailItem = inboxMail.map(mail=>(
-      <div><NavLink to={`/inbox/${mail.id}`}> <MailData key={mail.id} mail={mail} toorFrom='From' /></NavLink><Col xs={2}>
-      <Button mail={mail} onClick={deleteMailHandler(mail)} variant="danger">Delete</Button>
-    </Col></div>
+      <NavLink to={`/inbox/${mail.id}`}> <MailData key={mail.id} mail={mail} toorFrom='From' /></NavLink>
+    
+    
     ))
     console.log(mailItem)
    
